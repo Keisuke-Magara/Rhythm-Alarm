@@ -1,3 +1,8 @@
+# coding : utf-8
+# Test environment:
+# Operating System : Windows10 Pro education 64bit
+# Python : Python 3.9.5 64bit, Tkinter version8.6
+##########################################################################################################
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
