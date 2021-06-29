@@ -1,4 +1,4 @@
-# coding : utf-8
+# coding : utf-8, CRLF
 # Test environment:
 # Operating System : Windows10 Pro education 64bit
 # Python : Python 3.9.5 64bit, Tkinter version8.6
@@ -27,6 +27,8 @@ class Panel(ttk.Button):
 #ウィンドウ描画
 class JubeatFrame (ttk.Frame):
     panel = []
+    img = Image.open("./buttonImageTest.png")
+    img = ImageTk.PhotoImage(img)
 
     def __init__(self, master):
         super().__init__(master)
@@ -37,20 +39,29 @@ class JubeatFrame (ttk.Frame):
 
     def create_widgets (self):
         #display 9 panlels.
-        img = tk.PhotoImage(file="./Test.png")
+        #img = Image.open("./buttonImageTest.png")
+        #img = ImageTk.PhotoImage(img)
+        #img = tk.PhotoImage(file="./Test.png")
         for i in range (9):
             width = 35 #px
             height = 56 #px
-            self.panel.append(Panel(master=self, image=img, padding=(width, height, width, height)))
-        self.panel[0].place(x=0, y=0.1)
-        self.panel[1].place(relx=0.6, rely=500)
-        self.panel[2].place(relx=0.9, rely=500)
-        self.panel[3].place(relx=0.3, rely=500)
-        self.panel[4].place(relx=0.6, rely=5)
-        self.panel[5].place(relx=0.9, rely=0.8)
-        self.panel[6].place(relx=0.3, rely=0.8)
-        self.panel[7].place(relx=0.6, rely=0.8)
-        self.panel[8].place(relx=0.9, rely=0.8)
+            #padding=(width, height, width, height), 
+            self.panel.append(Panel(master=self, image=self.img, command=self.callfor(), name="Panel_"+str(i)))
+        y = 255
+        self.panel[0].place(x=0, y=0.1 + y)
+        self.panel[1].place(x=145, y=0.1 + y)
+        self.panel[2].place(x=290, y=0.1 + y)
+        self.panel[3].place(x=0, y=137 + y)
+        self.panel[4].place(x=145, y=137 + y)
+        self.panel[5].place(x=290, y=137 + y)
+        self.panel[6].place(x=0, y=274 + y)
+        self.panel[7].place(x=145, y=274 + y)
+        self.panel[8].place(x=290, y=274 + y)
+    
+    def callfor(self):
+        def inner (): # 実際に呼び出されるのはこっち
+            print ("Push Detected.\n")
+        return inner
 
 def main():
     #rootメインウィンドウの設定
