@@ -1,3 +1,4 @@
+# Version : 2.0
 # coding : utf-8, CRLF
 # Test environment:
 # Operating System : Windows10 Pro education 64bit
@@ -85,6 +86,8 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
 class GameStart:
     timing = [[0]*10]
     pre_sec = 2 # call collisionDetection() pre_sec second before touch time.
+    score = 0
+    goal_score = 14000 # この点数になるまで無限ループでjubeat
 
     def __init__ ():
         music.playsound()
