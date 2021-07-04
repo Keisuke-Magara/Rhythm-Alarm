@@ -11,7 +11,8 @@ import os
 import Timer
 import time
 
-global score, timer, frame
+global score, timer, frame, music_loaded
+music_loaded = -1
 
 def openFile(ftype=[("音楽ファイル", "*.mp3")]):
     filepath = filedialog.askopenfilename(filetypes=ftype, initialdir=os.path.abspath(os.path.dirname(__file__)))
@@ -36,7 +37,7 @@ class Panel (ttk.Button):
                 place.append(1)
             else:
                 place.append(0)
-        place.insert(0, play_time)
+        place.insert(0, timer.get_time())
         print(place)
         score.append(place)
 
@@ -99,7 +100,9 @@ class jubeat (ttk.Frame):
         temp = filepath.split("/")
         name = temp[len(temp)-1].split(".")
         self.music_name.set("Music Name : " + name[0] + "." + name[1] + "\n　---> Output : " + name[0] + ".score")
-        self.outputfile = name[0].score
+        self.outputfile = str(name[0]) + ".score"
+        music_loaded = 0
+        print(music_loaded)
         self.msg.set("ファイルの読み込み完了\n\"▶Play\"ボタンをクリックで再生開始")
 
     def showHELP (self):
@@ -107,12 +110,15 @@ class jubeat (ttk.Frame):
 
 def play_music ():
     try:
-        for i in range(3):
-            frame.msg.set("再生開始まで、" + str(3-i))
-            time.sleep(1)
-        pygame.mixer.music.play()
+        time.sleep(1)
+        print(music_loaded)
+        if (music_loaded == 0):
+            pygame.mixer.music.play()
+            print("pause")
+            pygame.mixer.music.unpause()
         timer.start()
         frame.msg.set("<<再生中>>\nパネルをクリックして譜面を作成")
+
     except pygame.error:
             frame.msg.set("音楽の再生に失敗しました。\nファイルを確認してください。")
 
@@ -139,7 +145,7 @@ if __name__ == "__main__":
     #    exit()
     #rootメインウィンドウの設定
     score = []
-    timer = Timer.MusicTimer
+    timer = Timer.MusicTimer()
     #timer.reset()
     root = tk.Tk()
     root.geometry("480x720")

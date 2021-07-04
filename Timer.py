@@ -10,7 +10,7 @@ class MusicTimer:
 
     def stop(self):
         self.stop_time = time.time()*1000
-        self.total_time += (stop_time - start_time)
+        self.total_time += (self.stop_time - self.start_time)
         return self.total_time
     
     def reset(self):
@@ -19,5 +19,5 @@ class MusicTimer:
         self.lap_time = 0
         self.total_time = 0
     
-    def get_timer(self):
+    def get_time(self):
         return self.total_time
