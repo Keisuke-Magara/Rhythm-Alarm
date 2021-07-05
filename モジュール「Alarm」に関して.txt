@@ -1,0 +1,22 @@
+関数
+read_setting()
+setting.txtを読み込んでリストに格納し、リストを返す
+
+write_setting(settings)
+リストsettingsをsetting.txtに書き込む
+
+calc_time_delta(time_h, time_m)
+(入力時刻)-(現在時刻)を計算して秒単位で返す
+
+クラス
+AlarmFrame(ttk.Frame)
+アラーム画面を描画し、指定時刻になると画面を切り替えて関数を実行するクラス
+コンストラクタ：Alarm.AlarmFrame(root, func, funcの引数)
+
+テキストファイル
+setting.txt
+　アラームセット時刻の時
+　アラームセット時刻の分
+　アラーム音
+　after関数用のID
+を1行ごとに記録する

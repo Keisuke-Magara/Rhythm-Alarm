@@ -5,91 +5,22 @@
 ##########################################################################################################
 import tkinter as tk
 from tkinter import ttk
-from PIL import Image, ImageTk
-import sys
-import time
 #自作モジュールインポート
+import JubeatFrame
 import sound
 #import Score
-#import Alarm
+import Alarm
 #import Panel
 #//
 
 #グローバル変数
 #//
 
-class Panel(ttk.Button):
-    bright:bool = False
-    imgName = "./buttonImageTest.png"
-
-    def __init__ (self, master=None, text=None, image=None, name=None, padding=None):
-        super().__init__(master)
-        self.configure(command=self.callfor)
-        if (text != None):
-            self.configure(text=text)
-        if (image != None):
-            self.imgName = image
-            img = Image.open(self.imgName)
-            img = ImageTk.PhotoImage(img)
-            self.configure(image=img)
-        #if (name != None):
-        #    self.configure(name=name)
-        if (padding != None):
-            self.configure(padding=padding)
-
-    def callfor(self): # ボタンが押されたときに実行される処理 (panelが押されたパネルを示す)
-        def inner(): # 実際に呼び出されるのはこっち (この中に処理を記述)
-            self.configure(text="pushd.")
-        return inner
-
-    #def refresh(): #ボタンのプロパティを反映する関数
-
-
-class JubeatFrame (ttk.Frame): # ゲーム画面描画
-    panel = []
-    #img = Image.open("./buttonImageTest.png")
-    #img = ImageTk.PhotoImage(file="./buttonImageTest.png")
-
-    def __init__(self, master):
-        super().__init__(master)
-        #self.pack()
-        #self.master.geometry("480x720")
-        #self.master.title("The jubeat alarm!")
-        self.create_widgets()
-
-    def create_widgets (self):
-        #display 9 panlels.
-        
-        #img = tk.PhotoImage(file="./Test.png")
-        for i in range (9):
-            width = 35 #px
-            height = 56 #px
-            #, padding=(width, height, width, height)
-            self.panel.append(Panel(self, text=i, name="panel_"+str(i), padding=(width, height, width, height)))
-            #pushd = self.callfor(self.panel[i])
-            #self.panel[i].config(command=pushd)
-        blank = 255
-        self.panel[0].place(x=0, y=0.1 + blank)
-        self.panel[1].place(x=145, y=0.1 + blank)
-        self.panel[2].place(x=290, y=0.1 + blank)
-        self.panel[3].place(x=0, y=137 + blank)
-        self.panel[4].place(x=145, y=137 + blank)
-        self.panel[5].place(x=290, y=137 + blank)
-        self.panel[6].place(x=0, y=274 + blank)
-        self.panel[7].place(x=145, y=274 + blank)
-        self.panel[8].place(x=290, y=274 + blank)
-
-
-
-
-class GameStart:
-    timing = [[0]*10]
-    pre_sec = 2 # call collisionDetection() pre_sec second before touch time.
-
-    def __init__ ():
-        music.playsound()
-
-
+def game_start(frame_jubeat):
+    frame_jubeat.tkraise()
+    settings = Alarm.read_setting()
+    sound.play_music(settings[2]+'.mp3')
+    
 def main():
     #rootメインウィンドウの設定
     root = tk.Tk()
@@ -100,16 +31,21 @@ def main():
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
     #画面ごとにFrameを作成
-    #frame_alarm = ttk.Frame(root)
-    frame_jubeat = JubeatFrame(root)
+    frame_jubeat = JubeatFrame.JubeatFrame(root)
+    frame_alarm = Alarm.AlarmFrame(root, game_start, frame_jubeat) #引数はroot, 次に切り替える画面のフレーム, 切り替え時に実行する関数
     #Frameを配置
+    frame_alarm.grid(row=0, column=0, sticky="nsew", pady=20, padx=20)
     frame_jubeat.grid(row=0, column=0, sticky="nsew", pady=20, padx=20)
     #app = Application(master=root)
+    #frame_alarmを最前面にする
+    frame_alarm.tkraise()
     #frame_jubeatを最前面にする
-    frame_jubeat.tkraise()
+    #frame_jubeat.tkraise()
     #game = GameStart
-    sound.play_music("./楽しみキッズ.mp3")
+    #sound.play_music("楽しみキッズ.mp3")
     root.mainloop()
 
+
+    
 if __name__ == "__main__":
     main()
