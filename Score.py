@@ -55,24 +55,18 @@ class Score:
         #判定(perfect=100点, great=70点, good= 50点, passable=10点)
         if any(self.elatime-self.perfect < t < self.elatime+self.perfect for t in self.tile):
             self.judge = 1
+            self.score = 100
         elif any(self.elatime-self.great < t < self.elatime+self.great for t in self.tile):
             self.judge = 2
+            self.score = 100
         elif any(self.elatime-self.good < t < self.elatime+self.good for t in self.tile):
             self.judge = 3
+            self.score = 100
         elif any(self.elatime-self.passable < t < self.elatime+self.passable for t in self.tile):
             self.judge = 4
+            self.score = 100
         else:
             self.judge = 0
-
-        if self.judge = 1:
             self.score = 100
-        elif self.judge = 2:
-            self.score = 70
-        elif self.judge = 3:
-            self.score = 50
-        elif self.judge = 4:
-            self.score = 10
-        else:
-            self.score = 0
-
+            
         return self.score
