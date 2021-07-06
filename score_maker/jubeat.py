@@ -30,7 +30,6 @@ class jubeat (ttk.Frame):
         if (self.music_status == 1 and pygame.mixer.music.get_busy() == 0):
             self.stop_music()
             self.save_file()
-            print("END")
             return False
         else:
             sec = self.timer.get_time() / 1000
@@ -127,6 +126,5 @@ class jubeat (ttk.Frame):
             for i in range (len(self.music_score)):
                 for j in range(10):
                     f.write(str(self.music_score[i][j]) + " ")
-                    print(self.refresh_music_time())
                 f.write("\n")
         tk.messagebox.showinfo("書き込み完了！", "曲が書き込まれました。")
