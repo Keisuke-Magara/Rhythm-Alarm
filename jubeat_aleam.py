@@ -38,9 +38,9 @@ def main():
     frame_jubeat.grid(row=0, column=0, sticky="nsew", pady=20, padx=20)
     #app = Application(master=root)
     #frame_alarmを最前面にする
-    frame_alarm.tkraise()
+    #frame_alarm.tkraise()
     #frame_jubeatを最前面にする
-    #frame_jubeat.tkraise()
+    frame_jubeat.tkraise()
     #game = GameStart
     #sound.play_music("楽しみキッズ.mp3")
     root.mainloop()

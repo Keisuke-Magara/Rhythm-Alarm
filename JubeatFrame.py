@@ -19,10 +19,10 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
         
         #img = tk.PhotoImage(file="./Test.png")
         for i in range (9):
-            width = 35 #px
+            width = 10 # "0" size.
             height = 56 #px
             #padding=(width, height, width, height)
-            self.panel.append(Panel.Panel(self, text=i, name="panel_"+str(i), padding=(width, height, width, height)))
+            self.panel.append(Panel.Panel(self, name=str(i)))
             #pushd = self.callfor(self.panel[i])
             #self.panel[i].config(command=pushd)
         blank = 255
