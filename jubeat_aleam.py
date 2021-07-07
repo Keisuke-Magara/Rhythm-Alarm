@@ -1,4 +1,3 @@
-# Version : 2.0
 # coding : utf-8, CRLF
 # Test environment:
 # Operating System : Windows10 Pro education 64bit
@@ -17,7 +16,6 @@ import Alarm
 #グローバル変数
 #//
 
-=======
 def game_start(frame_jubeat):
     frame_jubeat.tkraise()
     settings = Alarm.read_setting()
