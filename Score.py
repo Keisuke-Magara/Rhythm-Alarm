@@ -1,7 +1,5 @@
 #coding: utf-8
 
-import time
-
 class Score:
 
     bad = 1000 #判定範囲(±ms)
@@ -35,6 +33,8 @@ class Score:
         elif i == 4:
             self.tile = self.tile4
         elif i == 5:
+            self.tile = self.tile5
+        elif i == 6:
             self.tile = self.tile6
         elif i == 7:
             self.tile = self.tile7
