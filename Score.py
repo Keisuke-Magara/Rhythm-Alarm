@@ -4,11 +4,10 @@ import time
 
 class Score:
 
-    max_score = 100  #最大スコア
-    passable = 1000 #判定範囲(±ms)
-    good = 300
-    great = 150
-    perfect = 60
+    bad = 1000 #判定範囲(±ms)
+    good = 300 #(±ms)
+    great = 150 #(±ms)
+    perfect = 60 #(±ms)
  
     #コンストラクタ
     def __init__(self, music_list):
@@ -52,21 +51,16 @@ class Score:
         elif i == 9:
             self.tile = self.tile9
 
-        #判定(perfect=100点, great=70点, good= 50点, passable=10点)
+        #判定(perfect=100点, great=70点, good= 50点, bad=10点)
         if any(self.elatime-self.perfect < t < self.elatime+self.perfect for t in self.tile):
-            self.judge = 1
-            self.score = 100
+            self.score = 100 #perfect
         elif any(self.elatime-self.great < t < self.elatime+self.great for t in self.tile):
-            self.judge = 2
-            self.score = 100
+            self.score = 70 #great
         elif any(self.elatime-self.good < t < self.elatime+self.good for t in self.tile):
-            self.judge = 3
-            self.score = 100
-        elif any(self.elatime-self.passable < t < self.elatime+self.passable for t in self.tile):
-            self.judge = 4
-            self.score = 100
+            self.score = 50 #good
+        elif any(self.elatime-self.bad < t < self.elatime+self.bad for t in self.tile):
+            self.score = 10 #bad
         else:
-            self.judge = 0
-            self.score = 100
+            self.score = 0 #miss
             
         return self.score
