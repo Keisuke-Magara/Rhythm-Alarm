@@ -1,23 +1,23 @@
-from os import write
 import tkinter as tk
 from tkinter import StringVar, ttk
 import random
 import datetime
 
-from pygame import Color
 #セットした時間、音楽をsetting.txtから読み込み、リターンする
 #settingsリストは[アラームセット時刻の時, アラームセット時刻の分, アラーム音, After関数用のID ]
 def read_setting():
     with open('setting.txt', 'r')as f:
         settings = f.read().split('\n')
-        print('ファイル読み込み：'+str(settings))
+        print('settingファイル読み込み：'+str(settings))
+    f.close()
     return settings
 #セットした時間、音楽をsetting.txtに書き込み
 def write_setting(settings):
     with open('setting.txt', 'wt') as f:
         for num in range(4):
             f.write(settings[num]+'\n')
-        print('ファイル書き込み：'+str(settings))
+        #print('ファイル書き込み：'+str(settings))
+    f.close()
 def calc_time_delta(time_h, time_m): #入力時刻-現在時刻を計算して秒単位で返す
     now=datetime.datetime.now()
     print('現在時刻：'+str(now))
@@ -29,9 +29,10 @@ def calc_time_delta(time_h, time_m): #入力時刻-現在時刻を計算して�
         return time-now
     else:
         return time-now+86400
+
 class AlarmFrame(ttk.Frame): # アラーム画面描画
     #コンストラクタ
-    def __init__(self, master, func, frame_jubeat):
+    def __init__(self, master, func):
         super().__init__(master)
         settings = read_setting() 
         #アラームセット時刻のラベル
@@ -81,11 +82,11 @@ class AlarmFrame(ttk.Frame): # アラーム画面描画
             settings[1] = m.get()
             settings[2] = mn.get()
             write_setting(settings)
-            settings[3] = alarm(self, func, frame_jubeat)
+            settings[3] = alarm(self, func, master)
             #曲選択がランダムだった場合にランダムな曲名をsettingsに格納
             #曲数が増えたらrandit(a,b)のbを曲数に変える
             if mn.get() == 'random':
-                settings[2]=music_names[random.randint(1, 2)]
+                settings[2]=music_names[random.randint(1, self.num_of_music)]
             write_setting(settings)
             now_setting.set('現在のセット時刻：'+settings[0]+':'+settings[1])
         button1 = tk.Button(self, text='OK',bg='#FFB304', fg='#FFFFFF', width=5, font='游ゴシック 21 bold')
@@ -100,19 +101,26 @@ class AlarmFrame(ttk.Frame): # アラーム画面描画
         )
         label4.place(x=110, y=300)
         #アラームのコンボボックス
-        music_names = ['random', '楽しみキッズ', 'かえるのピアノ']
+        #music_names.txtを読み込み、楽曲リストmusic_namesを作成
+        with open('music_names.txt', 'r', encoding='utf-8')as f:
+            music_names = f.read().split('\n')
+            print('楽曲ファイル読み込み：'+str(music_names))
+        self.num_of_music = music_names[0]
+        music_names[0] = 'random'
+        f.close()
+
         mn = StringVar()
         cb_music=ttk.Combobox(self, textvariable=mn, values=music_names, width=15, height=5, font='MSゴシック 24 bold')
         cb_music.set(settings[2])
         cb_music.place(x=75,y=370)
 
         #アラームを実際に実行する関数(セットボタンを押したときに呼び出される)
-        def alarm(frame_alarm, func, frame_jubeat): #funcはメイン関数から定義, frame_jubeatはfuncの引数
+        def alarm(frame_alarm, func, root): #funcはメイン関数から定義, rootはfuncの引数
             settings = read_setting()
             time_delta = calc_time_delta(settings[0], settings[1])
             print('アラームまでの時間：'+str(time_delta)+'秒')
             frame_alarm.after_cancel(settings[3]) #前回設定したアラームのスケジュールを削除
-            settings[3] = frame_alarm.after(time_delta*1000, func, frame_jubeat) #新しくアラームのスケジュールを設定
+            settings[3] = frame_alarm.after(time_delta*1000, func, root) #新しくアラームのスケジュールを設定
             write_setting(settings)
             return settings[3]
 

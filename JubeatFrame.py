@@ -6,8 +6,13 @@ import Panel
 import datetime
 
 class JubeatFrame (ttk.Frame): # ゲーム画面描画
-    def __init__(self, master):
+    def __init__(self, master, score, parent, time):
         #self.configure(bg="black")
+        self.total_score = 0
+        self.root = master
+        self.parent = parent
+        self.score = score # Scoreクラスのインスタンスの参照
+        self.timer = time # MusicTimerクラスのインスタンスの参照
         self.panel = []
         self.style = ttk.Style()
         self.style.theme_use("alt")
@@ -19,7 +24,6 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
         self.music_name = tk.StringVar()
         self.score = tk.StringVar()
         self.create_widgets()
-        self.root = master
         self.root.after(1, self.repeat_processes)
 
     def create_widgets (self):
@@ -39,7 +43,7 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
         for i in range (9):
             width = 10 # "0" size.
             height = 56 #px
-            self.panel.append(Panel.Panel(self, name=str(i)))
+            self.panel.append(Panel.Panel(master=self, score=self.score, time=self.timer, name=str(i)))
         xoffset = 5
         yoffset = 255
         self.panel[0].place(x=0+xoffset, y=0+yoffset)

@@ -1,3 +1,4 @@
+from os import name, times
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
@@ -6,9 +7,16 @@ class Panel(ttk.Button):
     bright:bool = False
     defaultImg_name = "./default.png"
     brightImg_name = "./Box.gif" # 128*128px
+    perfectImg_name = "./perfect.png"
+    greatImg_name = "./great.png"
+    goodImg_name = "./good.png"
+    badImg_name = "./bad.png"
     fps = 30
 
-    def __init__ (self, master=None, text=None, imageName=None, name=None, padding=None, width=None):
+    def __init__ (self, master, score, time, text=None, imageName=None, name=None, padding=None, width=None):
+        self.parent = master
+        self.score = score
+        self.timer = time
         self.style = ttk.Style()
         self.style.configure("GameStyle.TButton", background="black")
         super().__init__(master=master, name=name, width=width)
@@ -27,6 +35,10 @@ class Panel(ttk.Button):
         self.default_img = tk.PhotoImage(file=self.defaultImg_name)
         self.configure(image=self.default_img)
         self.bright_img = tk.PhotoImage(file=self.brightImg_name)
+        self.perfect_img = tk.PhotoImage(file=self.perfectImg_name)
+        self.great_img = tk.PhotoImage(file=self.greatImg_name)
+        self.good_img = tk.PhotoImage(file=self.goodImg_name)
+        self.bad_img = tk.PhotoImage(file=self.badImg_name)
         if (padding != None):
             self.configure(padding=padding)
         self.bright()
@@ -51,8 +63,21 @@ class Panel(ttk.Button):
 
     def callfor(self): # ボタンが押されたときに実行される処理 (panelが押されたパネルを示す)
         self.moveable = False
-        root.after(int(1000/self.fps), self.set_default)
+        cur_socre = self.score.determineScore(int(self.cget(name)), self.timer.get_time())
+        self.root.after(int(1000/self.fps), self.show_well(cur_socre))
+        self.parent.total_score += cur_socre
     
+    def show_well (self, score):
+        if (cur_score == 100):
+            self.configure(image=self.perfect_img)
+        elif (cur_score == 70):
+            self.configure(image=self.great_img)
+        elif (cur_socre == 50):
+            self.configure(image=self.good_img)
+        elif (cur_socre == 10):
+            self.configure(image=self.bad_img)
+        self.root.after(250, self.set_default)
+
     def set_default(self):
         self.configure(image=self.default_img)
         self.gif_index = 0
