@@ -1,5 +1,5 @@
 # coding : utf-8
-# test environment : Windows10 Education ver.21H1 64bit, Python 3.9.5 64bit, Tkinter 8.9, pygame 2.0.1
+# test environment : Windows10 Education ver.21H1 64bit, Python 3.9.6 64bit, Tkinter 8.9, pygame 2.0.1
 
 import tkinter as tk
 from tkinter import ttk

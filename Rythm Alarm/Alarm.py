@@ -8,14 +8,14 @@ import sound
 #セットした時間、音楽をsetting.txtから読み込み、リターンする
 #settingsリストは[アラームセット時刻の時, アラームセット時刻の分, アラーム音, After関数用のID ]
 def read_setting():
-    with open('setting.txt', 'r')as f:
+    with open('./setting.txt', 'r')as f:
         settings = f.read().split('\n')
         #print('settingファイル読み込み：'+str(settings))
     f.close()
     return settings
 #セットした時間、音楽をsetting.txtに書き込み
 def write_setting(settings):
-    with open('setting.txt', 'wt') as f:
+    with open('./setting.txt', 'wt') as f:
         for num in range(4):
             f.write(settings[num]+'\n')
         #print('ファイル書き込み：'+str(settings))
@@ -89,7 +89,7 @@ class AlarmFrame(ttk.Frame): # アラーム画面描画
         cb_minutes.place(x=242,y=140)
         #セットのボタン
         def button1_clicked(a):#セットボタンを押したときに実行される関数
-            sound.play_se('SE_button.mp3')
+            sound.play_se('./assets/SE_button.mp3')
             settings[0] = h.get()
             settings[1] = m.get()
             settings[2] = mn.get()
@@ -115,7 +115,7 @@ class AlarmFrame(ttk.Frame): # アラーム画面描画
         label4.place(x=110, y=300)
         #アラーム音のコンボボックス
         #music_names.txtを読み込み、楽曲リストmusic_namesを作成
-        with open('music_names.txt', 'r', encoding='utf-8')as f:
+        with open('./assets/music_names.txt', 'r', encoding='utf-8')as f:
             music_names = f.read().split('\n')
             #print('楽曲ファイル読み込み：'+str(music_names))
         self.num_of_music = music_names[0]
