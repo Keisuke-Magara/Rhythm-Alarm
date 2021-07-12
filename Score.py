@@ -24,39 +24,39 @@ class Score:
         for i in range(1, int(music_list[0][0])+1):
             if music_list[i][1] == '1':
                 self.tile1.append(int(music_list[i][0]))
-        print('tile1:'+str(self.tile1))
+        #print('tile1:'+str(self.tile1))
         for i in range(1, int(music_list[0][0])+1):
             if music_list[i][2] == '1':
                 self.tile2.append(int(music_list[i][0]))
-        print('tile2:'+str(self.tile2))
+        #print('tile2:'+str(self.tile2))
         for i in range(1, int(music_list[0][0])+1):
             if music_list[i][3] == '1':
                 self.tile3.append(int(music_list[i][0]))
-        print('tile3:'+str(self.tile3))
+        #print('tile3:'+str(self.tile3))
         for i in range(1, int(music_list[0][0])+1):
             if music_list[i][4] == '1':
                 self.tile4.append(int(music_list[i][0]))
-        print('tile4:'+str(self.tile4))
+        #print('tile4:'+str(self.tile4))
         for i in range(1, int(music_list[0][0])+1):
             if music_list[i][5] == '1':
                 self.tile5.append(int(music_list[i][0]))
-        print('tile5:'+str(self.tile5))
+        #print('tile5:'+str(self.tile5))
         for i in range(1, int(music_list[0][0])+1):
             if music_list[i][6] == '1':
                 self.tile6.append(int(music_list[i][0]))
-        print('tile6:'+str(self.tile6))
+        #print('tile6:'+str(self.tile6))
         for i in range(1, int(music_list[0][0])+1):
             if music_list[i][7] == '1':
                 self.tile7.append(int(music_list[i][0]))
-        print('tile7:'+str(self.tile7))
+        #print('tile7:'+str(self.tile7))
         for i in range(1, int(music_list[0][0])+1):
             if music_list[i][8] == '1':
                 self.tile8.append(int(music_list[i][0]))
-        print('tile8:'+str(self.tile8))
+        #print('tile8:'+str(self.tile8))
         for i in range(1, int(music_list[0][0])+1):
             if music_list[i][9] == '1':
                 self.tile9.append(int(music_list[i][0]))
-        print('tile9:'+str(self.tile9))
+        #print('tile9:'+str(self.tile9))
         
     #引数:タイルの番号i,経過時間elatime 指定したタイルの判定範囲に応じたスコアを返す
     def determineScore(self,i,elatime):

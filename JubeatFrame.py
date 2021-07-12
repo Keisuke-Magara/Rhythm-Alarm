@@ -8,7 +8,7 @@ import datetime
 class JubeatFrame (ttk.Frame): # ゲーム画面描画
     def __init__(self, master, score, parent, time):
         #self.configure(bg="black")
-        self.goal_score = 15000 # この点数に達するまで永遠にループ
+        self.goal_score = 150 # この点数に達するまで永遠にループ
         self.total_score = 0
         self.root = master
         self.parent = parent

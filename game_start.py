@@ -20,9 +20,9 @@ class game_start():
         self.root = root
         self.settings = Alarm.read_setting()
         self.fumen_list = self.read_fumen(self.settings[2]+'.score')
-        print('譜面行数:'+self.fumen_list[0][0])
+        #print('譜面行数:'+self.fumen_list[0][0])
         fumen_for_score = numpy.delete(self.fumen_list, 0, 0) #譜面ファイルの1行目を削除
-        print('譜面:\n'+str(fumen_for_score))
+        #print('譜面:\n'+str(fumen_for_score))
         #****************************************************************
         #もし河西さんのScore.pyで正しい点数が取得できない場合は
         #少し書き換えたScore.pyをAnother_Scoreに入れたのでそれと交換した後
@@ -44,7 +44,7 @@ class game_start():
         try:
             f = open(file, 'r', encoding='utf-8')
         except Exception:
-            print("open error. not found file:", str(file))
+            #print("open error. not found file:", str(file))
             sys.exit(1)
         for line in f:
             line = line.strip() #前後空白削除
@@ -59,21 +59,21 @@ class game_start():
         for i in range(1,10):
             if self.fumen_list[notenum][i] ==  '1':
                 self.frame_jubeat.panel[i-1].bright()
-                print(str(notenum)+':'+self.fumen_list[notenum][0]+':'+str(i))
+                #print(str(notenum)+':'+self.fumen_list[notenum][0]+':'+str(i))
             
     #ゲームの繰り返し部分を実行する関数
     def repeat_game(self):
-        print('repeat')
+        #print('repeat')
         self.timer.reset()
         self.timer.start()
         sound.play_music(self.settings[2]+'.mp3')
         for i in range(1,int(self.fumen_list[0][0])+1):
             #print(self.fumen_list[i][0])
-            self.after_id_list.append(self.frame_jubeat.after(str(int(self.fumen_list[i][0])-1000), self.panel_bright, i))
+            self.after_id_list.append(self.frame_jubeat.after(str(int(self.fumen_list[i][0])-500), self.panel_bright, i))
         self.after_id_list.append(self.frame_jubeat.after(self.fumen_list[0][1], self.repeat_game))
     #ゲームを停止する関数
     def stop_game(self):
-        print('stop')
+        #print('stop')
         sound.stop_music()
         for after_id in self.after_id_list:
             self.frame_jubeat.after_cancel(after_id)

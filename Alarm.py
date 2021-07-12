@@ -10,7 +10,7 @@ import sound
 def read_setting():
     with open('setting.txt', 'r')as f:
         settings = f.read().split('\n')
-        print('settingファイル読み込み：'+str(settings))
+        #print('settingファイル読み込み：'+str(settings))
     f.close()
     return settings
 #セットした時間、音楽をsetting.txtに書き込み
@@ -22,11 +22,11 @@ def write_setting(settings):
     f.close()
 def calc_time_delta(time_h, time_m): #入力時刻-現在時刻を計算して秒単位で返す
     now=datetime.datetime.now()
-    print('現在時刻：'+str(now))
+    #print('現在時刻：'+str(now))
     now = now.hour*3600 + now.minute*60 + now.second
-    print('現在時刻：'+str(now)+'秒')
+    #print('現在時刻：'+str(now)+'秒')
     time = int(time_h)*3600 + int(time_m)*60
-    print('アラーム時刻：'+str(time)+'秒')
+    #print('アラーム時刻：'+str(time)+'秒')
     if time-now >= 0:
         return time-now
     else:
@@ -117,7 +117,7 @@ class AlarmFrame(ttk.Frame): # アラーム画面描画
         #music_names.txtを読み込み、楽曲リストmusic_namesを作成
         with open('music_names.txt', 'r', encoding='utf-8')as f:
             music_names = f.read().split('\n')
-            print('楽曲ファイル読み込み：'+str(music_names))
+            #print('楽曲ファイル読み込み：'+str(music_names))
         self.num_of_music = music_names[0]
         music_names[0] = 'random'
         f.close()
@@ -131,7 +131,7 @@ class AlarmFrame(ttk.Frame): # アラーム画面描画
         def alarm(frame_alarm, root):
             settings = read_setting()
             time_delta = calc_time_delta(settings[0], settings[1])
-            print('アラームまでの時間：'+str(time_delta)+'秒')
+            #print('アラームまでの時間：'+str(time_delta)+'秒')
             frame_alarm.after_cancel(settings[3]) #前回設定したアラームのスケジュールを削除
             settings[3] = frame_alarm.after(time_delta*1000, game_start.game_start, root) #新しくアラームのスケジュールを設定
             write_setting(settings)

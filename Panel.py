@@ -11,7 +11,7 @@ class Panel(ttk.Button):
     greatImg_name = "./great.png"
     goodImg_name = "./good.png"
     badImg_name = "./bad.png"
-    fps = 5
+    fps = 7
 
     def __init__ (self, master, score, time, text=None, imageName=None, name=None, padding=None, width=None):
         self.parent = master
@@ -70,7 +70,7 @@ class Panel(ttk.Button):
         self.show_well(cur_score)
         #self.root.after(int(1000/self.fps), self.show_well(cur_score))
         self.parent.total_score += cur_score
-        print(cur_score)
+        #print(cur_score)
         if self.parent.total_score >= self.parent.goal_score:
             self.parent.parent.stop_game() #(4)終了処理を追加
     
