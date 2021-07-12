@@ -11,14 +11,14 @@ class Panel(ttk.Button):
     greatImg_name = "./great.png"
     goodImg_name = "./good.png"
     badImg_name = "./bad.png"
-    fps = 30
+    fps = 5
 
     def __init__ (self, master, score, time, text=None, imageName=None, name=None, padding=None, width=None):
         self.parent = master
         self.score = score
         self.timer = time
         self.style = ttk.Style()
-        self.style.configure("GameStyle.TButton", background="black")
+        self.style.configure("GameStyle.TButton", background="blue")
         super().__init__(master=master, name=name, width=width)
         self.defaultimg = None
         self.bright_img = None
@@ -41,7 +41,7 @@ class Panel(ttk.Button):
         self.bad_img = tk.PhotoImage(file=self.badImg_name)
         if (padding != None):
             self.configure(padding=padding)
-        self.bright()
+        #self.bright()
     
 
     def bright(self):
@@ -49,32 +49,39 @@ class Panel(ttk.Button):
         self.next_frame()
     
     def next_frame(self):
-        try:
-            self.configure(image=self.bright_img)
-            self.bright_img.configure(format="gif -index {}".format(self.gif_index))
-            self.gif_index += 1
+        try: #(2)show_wellの表示が上書きされないようにself.moveable == trueの条件を加えた
+            if self.moveable == True:
+                self.configure(image=self.bright_img)
+                self.bright_img.configure(format="gif -index {}".format(self.gif_index))
+                self.gif_index += 1
         except tk.TclError:
-            self.set_default()
+            if self.moveable == True:
+                self.set_default()
         else:
-            if (self.moveable):
+            if self.moveable == True:
                 self.root.after(int(1000/self.fps), self.next_frame)
 
     
 
     def callfor(self): # ボタンが押されたときに実行される処理 (panelが押されたパネルを示す)
         self.moveable = False
-        cur_socre = self.score.determineScore(int(self.cget(name)), self.timer.get_time())
-        self.root.after(int(1000/self.fps), self.show_well(cur_socre))
-        self.parent.total_score += cur_socre
+        sound.play_se('SE_panel.mp3') #(3)ボタンを押したときにSEを流す
+        cur_score = self.score.determineScore(int(self.cget("text"))+1, int(self.timer.get_time()))
+        self.show_well(cur_score)
+        #self.root.after(int(1000/self.fps), self.show_well(cur_score))
+        self.parent.total_score += cur_score
+        print(cur_score)
+        if self.parent.total_score >= self.parent.goal_score:
+            self.parent.parent.stop_game() #(4)終了処理を追加
     
     def show_well (self, score):
-        if (cur_score == 100):
+        if (score == 100):
             self.configure(image=self.perfect_img)
-        elif (cur_score == 70):
+        elif (score == 70):
             self.configure(image=self.great_img)
-        elif (cur_socre == 50):
+        elif (score == 50):
             self.configure(image=self.good_img)
-        elif (cur_socre == 10):
+        elif (score == 10):
             self.configure(image=self.bad_img)
         self.root.after(250, self.set_default)
 

@@ -10,26 +10,20 @@ from pygame.constants import BUTTON_RIGHT
 #自作モジュールインポート
 #import Score
 import Alarm
-import game_start
 
-
-
-def start(root):
-    game = game_start.game_start(root)
-
-    
 def main():
     #rootメインウィンドウの設定
     root = tk.Tk()
     root.geometry("480x720")
-    root.title("rhythm alarm!")
+    root.title("Rhythm Alarm!")
     root.resizable(width=False, height=False)
+    #root.configure(background='#000000')
     #rootメインウィンドウのグリッドを1x1にする
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
     #画面ごとにFrameを作成
     #frame_jubeat = JubeatFrame.JubeatFrame(root)
-    frame_alarm = Alarm.AlarmFrame(root, start) #引数はroot, 次に切り替える画面のフレーム, 切り替え時に実行する関数
+    frame_alarm = Alarm.AlarmFrame(root) #引数はroot
     #Frameを配置
     frame_alarm.grid(row=0, column=0, sticky="nsew", pady=20, padx=20)
     #frame_jubeat.grid(row=0, column=0, sticky="nsew", pady=20, padx=20)

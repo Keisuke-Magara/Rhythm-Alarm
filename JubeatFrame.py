@@ -8,10 +8,11 @@ import datetime
 class JubeatFrame (ttk.Frame): # ゲーム画面描画
     def __init__(self, master, score, parent, time):
         #self.configure(bg="black")
+        self.goal_score = 15000 # この点数に達するまで永遠にループ
         self.total_score = 0
         self.root = master
         self.parent = parent
-        self.score = score # Scoreクラスのインスタンスの参照
+        self.score_class = score # Scoreクラスのインスタンスの参照
         self.timer = time # MusicTimerクラスのインスタンスの参照
         self.panel = []
         self.style = ttk.Style()
@@ -22,6 +23,7 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
         self.msg.set("こいつを止めるには、\nクリアするしかない。")
         self.clock = tk.StringVar()
         self.music_name = tk.StringVar()
+        self.music_name.set("アラーム音: 夜に駆ける")
         self.score = tk.StringVar()
         self.create_widgets()
         self.root.after(1, self.repeat_processes)
@@ -34,16 +36,16 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
         self.message_area = tk.Label(self, bg="gold", width=26, height = 2, font=("MSゴシック", 20, "bold"), textvariable=self.msg)
         self.message_area.place(x=0, y=50)
         # create music name area.
-        self.music_name_area = tk.Label(self, bg="black", fg="white", width=24, height=1, font=("MSゴシック", 25, "normal"), text="アラーム音: 夜に駆ける")
+        self.music_name_area = tk.Label(self, bg="black", fg="white", width=24, height=1, font=("MSゴシック", 25, "normal"), textvariable=self.music_name)
         self.music_name_area.place(x=0, y=130)
         # create Score area.
-        self.score_area = tk.Label(self, bg="green", width=10, height = 1, font=("MSゴシック", 40, "bold"), text="0000 / 15000")
+        self.score_area = tk.Label(self, bg="green", width=10, height = 1, font=("MSゴシック", 40, "bold"), textvariable=self.score)
         self.score_area.place(x=120, y=180)
         # create 9 panlels.
         for i in range (9):
             width = 10 # "0" size.
             height = 56 #px
-            self.panel.append(Panel.Panel(master=self, score=self.score, time=self.timer, name=str(i)))
+            self.panel.append(Panel.Panel(master=self, score=self.score_class, time=self.timer, name=str(i), text=str(i)))
         xoffset = 5
         yoffset = 255
         self.panel[0].place(x=0+xoffset, y=0+yoffset)
@@ -59,4 +61,5 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
     def repeat_processes(self):
         now = datetime.datetime.now()
         self.clock.set(now.strftime('%H:%M:%S'))
+        self.score.set(str(self.total_score) + " / " + str(self.goal_score))
         self.root.after(100, self.repeat_processes)
