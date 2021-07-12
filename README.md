@@ -1,24 +1,30 @@
-# GitHubの使い方（班員向け）
+# Rhythm Alarm!
+**コナミの大人気リズムゲーム "jubeat" のような、パネルクリック型のリズムゲームをクリアするまでミュージックが止まらないアラームです。**
 
-## ダウンロードするとき
-    左上のbranchが "main" になっていることを確認して、  
-    右上の緑色の "↓Code" をクリック  
-        ↓  
-    "Download ZIP" を選択  
+## **How to Use**
+    以下のライブラリを pip などでインストールし、 Rhythm_Alarm.py を実行してください。
+     - mugen
+     - numpy
+     - Pillow
+     - pygame
+     - tkinter
+    
+    ディレクトリ内のファイル構成を変更すると起動しなくなる可能性があります。
+    移動する際は、 The-Rythm-Alarm ディレクトリごと移動してください。
 
-## アップロードするとき
-    "↓Code" の左隣の "Add file🔽" をクリック  
-        ↓  
-    "Upload files" を選択  
-        ↓  
-    "Drag files here to add them to your repository" にファイルをドラッグアンドドロップ  
-        ↓  
-    "Commit changes" の下の欄に何かコメント (任意)  
-        ↓  
-    "Create a new branch for this commit and start a pull request." を選択  
-    🚫他の人のアップロードが消えるので、mainブランチに直接アップロードは厳禁です❗  
-        ↓  
-    好きな名前(ex: 日付 + 学番やイニシャル)を入れて誰のアップロードか分かるようにして、  
-    緑色のボタン "Commit changes" をクリック　　
+## **製作者**
+    
+## **フォルダ構造**
 
-**本格的にgitを使いたい場合は[このページ](https://breezegroup.co.jp/202102/vscode-github-windows/)などを見てみるといいかもしれないです。**
+## **クラス図**
+
+## **Score maker for Rhythm Alarm**
+
+## **Pyinstallerによるexeファイル化**
+    Pyinstaller ライブラリを使用してexeファイル化する場合、以下の点に注意してください。
+     - exeファイル化の副作用として、パネルのGIFアニメーションの表示が速くなります。
+        => Panel.py 14行目 fps の値を 14fps (元のフレーム28fpsの半分) に設定することで改善します。
+        => delay を 636ms くらいに設定するとパネルのアニメーションとミュージックのタイミングが同期します。
+    
+     - exeファイル化によって、assetsフォルダや設定ファイルなどが失われてしまうため、復元してから起動してください。
+        => assets フォルダ と music_names.txt, setting.txt を完成した Rhythm_Alarm.exe と同階層のディレクトリにコピーしてください。

@@ -23,7 +23,7 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
         self.msg.set("こいつを止めるには、\nクリアするしかない。")
         self.clock = tk.StringVar()
         self.music_name = tk.StringVar()
-        self.music_name.set("アラーム音: 夜に駆ける")
+        self.music_name.set("アラーム音: " + self.parent.setting[2])
         self.score = tk.StringVar()
         self.create_widgets()
         self.root.after(1, self.repeat_processes)

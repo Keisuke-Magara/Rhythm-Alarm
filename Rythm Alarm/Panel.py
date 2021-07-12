@@ -5,13 +5,13 @@ from PIL import Image, ImageTk
 import sound
 class Panel(ttk.Button):
     bright:bool = False
-    defaultImg_name = "./default.png"
-    brightImg_name = "./Box.gif" # 128*128px
-    perfectImg_name = "./perfect.png"
-    greatImg_name = "./great.png"
-    goodImg_name = "./good.png"
-    badImg_name = "./bad.png"
-    fps = 14 # GIF画像は28fpsです。pyinstallerでexeファイル化するときは
+    defaultImg_name = ".assets/default.png"
+    brightImg_name = ".assets/Box.gif" # 128*128px
+    perfectImg_name = ".assets/perfect.png" # 128*128px
+    greatImg_name = ".assets/great.png" # 128*128px
+    goodImg_name = ".assets/good.png" # 128*128px
+    badImg_name = ".assets/bad.png" # 128*128px
+    fps = 14 # GIF画像は28fpsです。pyinstallerでexeファイル化するときは14fpsに設定(1/2倍速)に設定してください。
 
     def __init__ (self, master, score, time, text=None, imageName=None, name=None, padding=None, width=None):
         self.parent = master
