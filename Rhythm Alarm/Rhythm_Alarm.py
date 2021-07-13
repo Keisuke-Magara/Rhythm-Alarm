@@ -1,12 +1,11 @@
 # coding : utf-8, CRLF
 # Test environment:
-#  Operating System : Windows10 Pro education version 21H1 64bit
-#  Python : Python 3.9.6 64bit, Tkinter version8.6, pygame 2.0.1 (SDL 2.0.14)
-#  Used external library : tkinter, Pillow, numpy, pygame, mugen
+#   Operating System : Windows10 Pro education version 21H1 64bit
+#   Python : Python 3.9.6 64bit, Tkinter version8.6, pygame 2.0.1 (SDL 2.0.14)
+#   Used external library : tkinter, Pillow, numpy, pygame, mugen
 ##########################################################################################################
 # >>Pythonファイルを実行する場合
 #   Panel.py 14行目 fpsの値を 14 に設定してください。
-#   delayを 636ms に設定してください。
 # >>Pyinstallerを使ってexeファイル化して実行する場合
 #   Panel.py 14行目 fpsの値を 28 に設定してください。
 #   delayを 571ms に設定してください。

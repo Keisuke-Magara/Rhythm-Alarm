@@ -8,7 +8,7 @@ import datetime
 class JubeatFrame (ttk.Frame): # ゲーム画面描画
     def __init__(self, master, score, parent, time):
         #self.configure(bg="black")
-        self.goal_score = 1500 # この点数に達するまで永遠にループ
+        self.goal_score = 15000 # この点数に達するまで永遠にループ
         self.total_score = 0
         self.root = master
         self.parent = parent
@@ -23,10 +23,19 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
         self.msg.set("こいつを止めるには、\nクリアするしかない。")
         self.clock = tk.StringVar()
         self.music_name = tk.StringVar()
-        self.music_name.set("アラーム音: " + "music_name")
+        self.music_name.set("アラーム音: " + self.parent.settings[2])
         self.score = tk.StringVar()
         self.create_widgets()
         self.root.after(1, self.repeat_processes)
+
+        #リザルト画面で使う変数
+        self.combo=0 # good以上が連続で出た数
+        self.perfect=0 # perfectが出た回数
+        self.great=0 # greatが出た回数
+        self.good=0 # goodが出た回数
+        self.bad=0 # badが出た回数
+        self.miss=0 # missが出た回数
+        self.max_combo=0 # コンボの最大値
 
     def create_widgets (self):
         # create clock area.
@@ -34,13 +43,13 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
         self.clock_area.place(x=70, y=0)
         # create message area.
         self.message_area = tk.Label(self, bg="gold", width=26, height = 2, font=("MSゴシック", 20, "bold"), textvariable=self.msg)
-        self.message_area.place(x=0, y=50)
+        self.message_area.place(x=0, y=100)
         # create music name area.
         self.music_name_area = tk.Label(self, bg="black", fg="white", width=24, height=1, font=("MSゴシック", 25, "normal"), textvariable=self.music_name)
-        self.music_name_area.place(x=0, y=130)
+        self.music_name_area.place(x=0, y=53)
         # create Score area.
-        self.score_area = tk.Label(self, bg="green", width=12, height = 1, font=("MSゴシック", 40, "bold"), textvariable=self.score)
-        self.score_area.place(x=110, y=180)
+        self.score_area = tk.Label(self, bg="green", width=11, height = 1, font=("MSゴシック", 40, "bold"), textvariable=self.score)
+        self.score_area.place(x=75, y=180)
         # create 9 panlels.
         for i in range (9):
             width = 10 # "0" size.
