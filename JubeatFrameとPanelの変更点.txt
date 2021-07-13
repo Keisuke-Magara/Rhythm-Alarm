@@ -1,0 +1,60 @@
+----------JubeatFrame.pyの変更点----------
+①26行目の
+self.music_name.set("アラーム音: " + "music_name")
+を
+self.music_name.set("アラーム音: " + self.parent.settings[2])
+に変更
+
+②29行目（self.root.after(1, self.repeat_processes))の下に
+        #リザルト画面で使う変数
+        self.combo=0
+        self.perfect=0
+        self.great=0
+        self.good=0
+        self.bad=0
+        self.miss=0
+        self.max_combo=0
+を追加
+
+
+
+----------Panel.pyの変更点----------
+①59行目
+            if self.moveable == True:
+                self.set_default()
+の下に
+                self.parent.miss += 1 #missの表示が切れたらミス数をインクリメント
+                self.parent.combo = 0 #missしたのでコンボは0になる
+を追加
+
+②77行目のshow_well関数を
+    def show_well (self, score):
+        if (score == 100):
+            self.configure(image=self.perfect_img)
+        elif (score == 70):
+            self.configure(image=self.great_img)
+        elif (score == 50):
+            self.configure(image=self.good_img)
+        elif (score == 10):
+            self.configure(image=self.bad_img)
+        self.root.after(250, self.set_default)
+から
+    def show_well (self, score):
+        self.parent.combo += 1 #ボタンが押されたらとりあえずコンボ数をインクリメント
+        if (score == 100):
+            self.configure(image=self.perfect_img)
+            self.parent.perfect += 1 #perfect数をインクリメント
+        elif (score == 70):
+            self.configure(image=self.great_img)
+            self.parent.great += 1 #great数をインクリメント
+        elif (score == 50):
+            self.configure(image=self.good_img)
+            self.parent.good += 1 #good数をインクリメント
+        elif (score == 10):
+            self.configure(image=self.bad_img)
+            self.parent.bad += 1 #bad数をインクリメント
+            self.parent.combo = 0 #badだった場合はコンボ数を0にする
+        if self.parent.combo > self.parent.max_combo: #最大コンボよりもコンボ数が多ければ最大コンボ数を更新
+            self.parent.max_combo = self.parent.combo
+        self.root.after(250, self.set_default)
+に変更

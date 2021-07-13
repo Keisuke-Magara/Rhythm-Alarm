@@ -29,10 +29,19 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
         self.msg.set("こいつを止めるには、\nクリアするしかない。")
         self.clock = tk.StringVar()
         self.music_name = tk.StringVar()
-        self.music_name.set("アラーム音: " + "music_name")
+        self.music_name.set("アラーム音: " + self.parent.settings[2])
         self.score = tk.StringVar()
         self.create_widgets()
         self.root.after(1, self.repeat_processes)
+
+        #リザルト画面で使う変数
+        self.combo=0
+        self.perfect=0
+        self.great=0
+        self.good=0
+        self.bad=0
+        self.miss=0
+        self.max_combo=0
 
     def create_widgets (self):
         # create clock area.
