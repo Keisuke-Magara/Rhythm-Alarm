@@ -171,5 +171,5 @@ class jubeat (ttk.Frame):
                     sys.exit()
         else:
             res = tk.messagebox.showwarning("保存完了 - 警告", "曲が書き込まれました。\n場所: " + os.getcwd() + "\\assets\\" + self.outputfile + "\n\nerror: 新しいアラームをデータベースに登録できませんでした。\n音楽ファイル, scoreファイルをRhythm_alarm.pyがあるディレクトリのassetsフォルダ内に移動し、music_names.txtを編集してください。")
-                if (res == 'ok'):
-                    sys.exit()
+            if (res == 'ok'):
+                sys.exit()
