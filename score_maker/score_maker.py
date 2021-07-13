@@ -24,7 +24,7 @@ def repeat_function():
 if __name__ == "__main__":
     root = tk.Tk()
     root.geometry("480x720")
-    root.title("Score maker for The jubeat alarm!")
+    root.title("Score maker for Rhythm Alarm!")
     root.resizable(width=False, height=False)
     #rootメインウィンドウのグリッドを1x1にする
     root.grid_rowconfigure(0, weight=1)
