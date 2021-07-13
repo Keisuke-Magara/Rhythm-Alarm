@@ -5,12 +5,12 @@ from PIL import Image, ImageTk
 import sound
 class Panel(ttk.Button):
     bright:bool = False
-    defaultImg_name = ".assets/default.png"
-    brightImg_name = ".assets/Box.gif" # 128*128px
-    perfectImg_name = ".assets/perfect.png" # 128*128px
-    greatImg_name = ".assets/great.png" # 128*128px
-    goodImg_name = ".assets/good.png" # 128*128px
-    badImg_name = ".assets/bad.png" # 128*128px
+    defaultImg_name = "./assets/default.png"
+    brightImg_name = "./assets/Box.gif" # 128*128px
+    perfectImg_name = "./assets/perfect.png" # 128*128px
+    greatImg_name = "./assets/great.png" # 128*128px
+    goodImg_name = "./assets/good.png" # 128*128px
+    badImg_name = "./assets/bad.png" # 128*128px
     fps = 14 # GIF画像は28fpsです。pyinstallerでexeファイル化するときは14fpsに設定(1/2倍速)に設定してください。
 
     def __init__ (self, master, score, time, text=None, imageName=None, name=None, padding=None, width=None):
@@ -65,7 +65,7 @@ class Panel(ttk.Button):
 
     def callfor(self): # ボタンが押されたときに実行される処理 (panelが押されたパネルを示す)
         self.moveable = False
-        sound.play_se('SE_panel.mp3') #(3)ボタンを押したときにSEを流す
+        sound.play_se('./assets/SE_panel.mp3') #(3)ボタンを押したときにSEを流す
         cur_score = self.score.determineScore(int(self.cget("text"))+1, int(self.timer.get_time()))
         self.show_well(cur_score)
         #self.root.after(int(1000/self.fps), self.show_well(cur_score))
