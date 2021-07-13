@@ -267,7 +267,7 @@ class DelayTestPanel(ttk.Button):
         self.fps=28#panelを参照して上書きされるため、書き換える必要はないです
         self.parent = master
         self.style = ttk.Style()
-        self.style.configure("GameStyle.TButton", background="blue")
+        self.style.configure("GameStyle.TButton", background="Black")
         super().__init__(master=master, name=name, width=width)
         self.defaultimg = None
         self.bright_img = None

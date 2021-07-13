@@ -19,7 +19,7 @@ class Panel(ttk.Button):
         self.score = score
         self.timer = time
         self.style = ttk.Style()
-        self.style.configure("GameStyle.TButton", background="blue")
+        self.style.configure("GameStyle.TButton", background="Black")
         super().__init__(master=master, name=name, width=width)
         self.defaultimg = None
         self.bright_img = None
@@ -75,7 +75,7 @@ class Panel(ttk.Button):
         self.show_well(cur_score)
         #self.root.after(int(1000/self.fps), self.show_well(cur_score))
         self.parent.total_score += cur_score
-        self.parent.msg.set("\n" + self.parent.com)
+        self.parent.msg.set("朝からコンボ繋いでけ！\n" + str(self.parent.combo) + " Combo!")
         #print(cur_score)
         if self.parent.total_score >= self.parent.goal_score:
             self.parent.parent.stop_game() #(4)終了処理を追加

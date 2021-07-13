@@ -9,13 +9,7 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
     def __init__(self, master, score, parent, time):
         #self.configure(bg="black")
         self.goal_score = 15000 # この点数に達するまで永遠にループ
-        self.total_score = 14000
-        self.combo = 0 # good以上が連続で出た数
-        self.max_combo = 0 # コンボの最大値
-        self.perfect = 0 # perfectが出た回数
-        self.great = 0 # greatが出た回数
-        self.good = 0 # goodが出た回数
-        self.bad = 0 # badが出た回数
+        self.total_score = 0
         self.root = master
         self.parent = parent
         self.score_class = score # Scoreクラスのインスタンスの参照
@@ -35,13 +29,13 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
         self.root.after(1, self.repeat_processes)
 
         #リザルト画面で使う変数
-        self.combo=0
-        self.perfect=0
-        self.great=0
-        self.good=0
-        self.bad=0
-        self.miss=0
-        self.max_combo=0
+        self.combo=0 # good以上が連続で出た数
+        self.perfect=0 # perfectが出た回数
+        self.great=0 # greatが出た回数
+        self.good=0 # goodが出た回数
+        self.bad=0 # badが出た回数
+        self.miss=0 # missが出た回数
+        self.max_combo=0 # コンボの最大値
 
     def create_widgets (self):
         # create clock area.
