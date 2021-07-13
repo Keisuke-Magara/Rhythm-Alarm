@@ -44,7 +44,7 @@ class ResultFrame(ttk.Frame): # アラーム画面描画
 
         #終了のボタン
         def button1_clicked(a):#セットボタンを押したときに実行される関数
-            sound.play_se('SE_button.mp3')
+            sound.play_se('./assets/SE_button.mp3')
             self.after(300, sys.exit)
         button1 = tk.Button(self, text='終了',bg='#FFB340', fg='#000000', width=5, font='游ゴシック 21 bold')
         button1.bind('<Button-1>',button1_clicked, self)
