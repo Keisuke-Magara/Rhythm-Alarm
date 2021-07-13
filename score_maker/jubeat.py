@@ -2,10 +2,12 @@ import tkinter as tk
 from tkinter import ttk
 import Panel
 import os
+import sys
 import pygame
 import Timer
 import time
 from mutagen.mp3 import MP3
+import shutil
 
 class jubeat (ttk.Frame):
     def __init__ (self, master):
@@ -17,7 +19,10 @@ class jubeat (ttk.Frame):
         self.music_name.set("Music Name : " + "______.mp3" + "\n　---> Output : " + "______.score")
         self.music_time = "--:--"
         self.playing_time = "--:--"
+        self.Musicfilepath = None
         self.outputfile = None
+        self.newMusicName = None
+        self.overwrite = False
         self.panel = []
         self.timer = Timer.MusicTimer()
         self.time_info = tk.StringVar()
@@ -81,18 +86,26 @@ class jubeat (ttk.Frame):
 
     def load_music (self):
         try:
-            filepath = tk.filedialog.askopenfilename(filetypes=[("音楽ファイル", "*.mp3")], initialdir=os.path.abspath(os.path.dirname(__file__)))
-            pygame.mixer.music.load(filepath)
-            temp = filepath.split("/")
+            self.Musicfilepath = tk.filedialog.askopenfilename(filetypes=[("音楽ファイル", "*.mp3")], initialdir=os.path.abspath(os.path.dirname(__file__)))
+            pygame.mixer.music.load(self.Musicfilepath)
+            temp = self.Musicfilepath.split("/")
             name = temp[len(temp)-1].split(".")
             self.music_name.set("Music Name : " + name[0] + "." + name[1] + "\n　---> Output : " + name[0] + ".score")
             self.outputfile = str(name[0]) + ".score"
+            self.newMusicName = str(name[0])
+            if (os.path.isfile("./assets/" + self.outputfile)):
+                response = tk.messagebox.askokcancel("上書き警告", "今から作成しようとしている譜面ファイル " + self.outputfile + " は既に存在するようです。\n譜面ファイルを上書きして続けますか？")
+                if (response==False):
+                    sys.exit()
+                else:
+                    self.overwrite = True
             self.music_status = 0
             self.msg.set("ファイルの読み込み完了\n\"▶Play\"ボタンをクリックで再生開始")
-            audio = MP3(filepath)
+            audio = MP3(self.Musicfilepath)
             min = int(audio.info.length / 60)
             sec = int(audio.info.length - 60*min)
             self.music_time = str(min) + ":" + str(sec).zfill(2)
+            self.timer.reset()
             self.refresh_music_time()
         except pygame.error:
             pass
@@ -122,9 +135,41 @@ class jubeat (ttk.Frame):
             self.msg.set("<<再生一時停止中>>\n\"▶Play\"ボタンをクリックして再開")
 
     def save_file (self):
-        with open("./" + self.outputfile, "w") as f:
+        try:
+            os.mkdir("assets/")
+        except FileExistsError:
+            pass
+        with open("./assets/" + self.outputfile, "w") as f:
+            f.write(str(len(self.music_score)) + " " + str(int(self.timer.get_time()+1000)) + " 0 0 0 0 0 0 0 0\n")
             for i in range (len(self.music_score)):
                 for j in range(10):
                     f.write(str(self.music_score[i][j]) + " ")
                 f.write("\n")
-        tk.messagebox.showinfo("書き込み完了！", "曲が書き込まれました。")
+        if (os.path.exists(self.newMusicName + ".mp3") == False):
+            try:
+                shutil.copyfile(self.Musicfilepath, "./assets/" + self.newMusicName + ".mp3")
+            except:
+                tk.messagebox.showerror("楽曲ファイルコピー失敗", "楽曲ファイルをassetsフォルダに移動することに失敗しました。\n手動での移動をお願いします。")
+        if (self.overwrite):
+            try:
+                data = None
+                with open("./music_names.txt", "r", encoding="utf-8") as f:
+                    data = f.readlines() # ファイル内容を読み込み
+                newnum = int(data[0].replace("\n", " "))+1 # 曲数+1
+                data.append("\n" + self.newMusicName) # 曲リストに新しい曲を追加
+                del data[0] # 曲数の部分を削除
+                with open("./music_names.txt", "w", encoding="utf-8") as f:
+                    f.write(str(newnum) + "\n") # 更新した曲数を書き込み
+                    for i in range(len(data)):
+                        f.write(data[i]) # 更新した曲名リストを書き込み
+                res = tk.messagebox.showinfo("保存完了！", "曲が書き込まれました。\n場所: " + os.getcwd() + "\\assets\\" + self.outputfile)
+                if (res == 'ok'):
+                    sys.exit()
+            except FileNotFoundError:
+                res = tk.messagebox.showwarning("保存完了 - 警告", "曲が書き込まれました。\n場所: " + os.getcwd() + "\\assets\\" + self.outputfile + "\n\nerror: 新しいアラームをデータベースに登録できませんでした。\n音楽ファイル, scoreファイルをRhythm_alarm.pyがあるディレクトリのassetsフォルダ内に移動し、music_names.txtを編集してください。")
+                if (res == 'ok'):
+                    sys.exit()
+        else:
+            res = tk.messagebox.showwarning("保存完了 - 警告", "曲が書き込まれました。\n場所: " + os.getcwd() + "\\assets\\" + self.outputfile + "\n\nerror: 新しいアラームをデータベースに登録できませんでした。\n音楽ファイル, scoreファイルをRhythm_alarm.pyがあるディレクトリのassetsフォルダ内に移動し、music_names.txtを編集してください。")
+                if (res == 'ok'):
+                    sys.exit()
