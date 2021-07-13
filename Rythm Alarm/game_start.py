@@ -16,6 +16,7 @@ class game_start():
     after_id_list = []  # 実行予定のアフター関数のIDを記録
     fumen_list = []  # 譜面の2次元配列
     settings = []  # 設定ファイルの配列
+    combo_flag = True
 
     # game_startのコンストラクタ
     def __init__(self, root):
