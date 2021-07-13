@@ -10,7 +10,7 @@
 # >>Pyinstallerを使ってexeファイル化して実行する場合
 #   Panel.py 14行目 fpsの値を 28 に設定してください。
 #   delayを 571ms に設定してください。
-# 詳しくは README.md ファイル や GitHub (https://github.com/Keisuke-Magara/Rhythm_Alarm) をご確認ください。
+# 詳しくは README.md ファイル や GitHub (https://github.com/Keisuke-Magara/The-Rhythm-Alarm) をご確認ください。
 ##########################################################################################################
 import tkinter as tk
 from tkinter import ttk

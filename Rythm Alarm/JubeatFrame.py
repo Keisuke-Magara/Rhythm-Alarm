@@ -39,8 +39,8 @@ class JubeatFrame (ttk.Frame): # ゲーム画面描画
         self.music_name_area = tk.Label(self, bg="black", fg="white", width=24, height=1, font=("MSゴシック", 25, "normal"), textvariable=self.music_name)
         self.music_name_area.place(x=0, y=130)
         # create Score area.
-        self.score_area = tk.Label(self, bg="green", width=10, height = 1, font=("MSゴシック", 40, "bold"), textvariable=self.score)
-        self.score_area.place(x=120, y=180)
+        self.score_area = tk.Label(self, bg="green", width=12, height = 1, font=("MSゴシック", 40, "bold"), textvariable=self.score)
+        self.score_area.place(x=110, y=180)
         # create 9 panlels.
         for i in range (9):
             width = 10 # "0" size.

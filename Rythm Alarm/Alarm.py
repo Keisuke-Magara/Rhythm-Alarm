@@ -115,7 +115,7 @@ class AlarmFrame(ttk.Frame): # アラーム画面描画
         label4.place(x=110, y=300)
         #アラーム音のコンボボックス
         #music_names.txtを読み込み、楽曲リストmusic_namesを作成
-        with open('./assets/music_names.txt', 'r', encoding='utf-8')as f:
+        with open('./music_names.txt', 'r', encoding='utf-8')as f:
             music_names = f.read().split('\n')
             #print('楽曲ファイル読み込み：'+str(music_names))
         self.num_of_music = music_names[0]
