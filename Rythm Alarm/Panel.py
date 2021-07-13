@@ -4,9 +4,10 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import sound
 class Panel(ttk.Button):
-    bright:bool = False
+    #bright:bool = False
     defaultImg_name = "./assets/default.png"
     brightImg_name = "./assets/Box.gif" # 128*128px
+    #brightImg_name = "./shutter.gif"
     perfectImg_name = "./assets/perfect.png" # 128*128px
     greatImg_name = "./assets/great.png" # 128*128px
     goodImg_name = "./assets/good.png" # 128*128px
@@ -74,6 +75,7 @@ class Panel(ttk.Button):
         self.show_well(cur_score)
         #self.root.after(int(1000/self.fps), self.show_well(cur_score))
         self.parent.total_score += cur_score
+        self.parent.msg.set("\n" + self.parent.com)
         #print(cur_score)
         if self.parent.total_score >= self.parent.goal_score:
             self.parent.parent.stop_game() #(4)終了処理を追加
