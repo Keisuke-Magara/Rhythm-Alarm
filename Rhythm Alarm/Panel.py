@@ -4,10 +4,8 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import sound
 class Panel(ttk.Button):
-    #bright:bool = False
     defaultImg_name = "./assets/default.png"
     brightImg_name = "./assets/Box.gif" # 128*128px
-    #brightImg_name = "./shutter.gif"
     perfectImg_name = "./assets/perfect.png" # 128*128px
     greatImg_name = "./assets/great.png" # 128*128px
     goodImg_name = "./assets/good.png" # 128*128px
@@ -25,6 +23,7 @@ class Panel(ttk.Button):
         self.bright_img = None
         self.moveable = False
         self.root = master
+        self.fps=int(self.parent.parent.settings[4]) # settings.txtからフレームレートを読み込む
         self.gif_index = 0
         self.configure(command=lambda:self.callfor())
         if (text != None):
@@ -103,18 +102,3 @@ class Panel(ttk.Button):
     def set_default(self):
         self.configure(image=self.default_img)
         self.gif_index = 0
-
-    #def refresh(): #ボタンのプロパティを反映する関数
-
-    #def bright(self)
-    #def debright()
-
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    frame = tk.Frame(root)
-    frame.pack(fill = tk.BOTH, padx=20,pady=10)
-    panel = Panel(root)
-    panel.pack()
-    #panel.bright()
-    root.mainloop()

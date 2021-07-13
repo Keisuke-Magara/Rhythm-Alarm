@@ -5,7 +5,7 @@ import datetime
 import game_start
 import sound
 from PIL import Image, ImageTk
-from os import name, times
+from os import name, read, times
 from tkinter.constants import FLAT, NO, Y
 import Score
 import Timer
@@ -22,7 +22,7 @@ def read_setting():
 #セットした時間、音楽をsetting.txtに書き込み
 def write_setting(settings):
     with open('./setting.txt', 'wt') as f:
-        for num in range(4):
+        for num in range(5):
             f.write(settings[num]+'\n')
         #print('ファイル書き込み：'+str(settings))
     f.close()
@@ -205,6 +205,16 @@ class DelayTestFrame (ttk.Frame): # ゲーム画面描画
         self.delay_entry.set(self.delay)
         entry1 = ttk.Entry(self, textvariable=self.delay_entry, width =5,font='メイリオ 21 bold')
         entry1.place(x=265, y=220)
+        #パネルの速度のラベル
+        self.settings=read_setting()
+        label1 = ttk.Label(
+            self,
+            text = 'パネルの速度:'+str(self.settings[4]),
+            foreground='#A5A5AC',
+            background='#000000',
+            font = ('メイリオ', '12'),
+        )
+        label1.place(x=156, y=440)
         #測定ボタン
         def button1_clicked(a):#測定ボタンを押したときに実行される関数
             sound.play_se('./assets/SE_button.mp3')

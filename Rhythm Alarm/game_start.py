@@ -61,6 +61,8 @@ class game_start():
                 #print(str(notenum)+':'+self.fumen_list[notenum][0]+':'+str(i))
     
     def start(self):
+        with open("./delay.txt", "r") as f:
+            self.delay = int(f.readline())
         self.settings = Alarm.read_setting()
         self.fumen_list = self.read_fumen('./assets/'+self.settings[2]+'.score')
         self.score=Score.Score(self.fumen_list)
