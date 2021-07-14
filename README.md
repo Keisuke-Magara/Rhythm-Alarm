@@ -31,7 +31,7 @@
     東京都市大学 2021年度 SD-PBL(2) 第2期05班
         河西俊哉, 塩月雄也, 土岐健太郎, 眞柄圭佑, 三橋亮太
 
-以下， "Rhythm Alarm!" と "Score maker for Rhythm Alarm!" という言葉が出てきますが，exeファイルを使用する方は Rhythm_Alarm.exe と Score_maker.exe ，Pythonファイルを使用する方は Rhythm_Alarm.py と Score_maker.py と読み替えてください。
+以下， "Rhythm Alarm!" と "Score maker for Rhythm Alarm!" という言葉が出てきますが，exeファイルを使用する方は Rhythm_Alarm.exe と score_maker.exe ，Pythonファイルを使用する方は Rhythm_Alarm.py と score_maker.py と読み替えてください。
 
 ## **楽曲の追加と削除**
     楽曲の追加には，付属の Score maker for Rhythm Alarm! をお使いください。
@@ -50,10 +50,10 @@
         1. 作成したい譜面の楽曲ファイルをPCに保存しておきます。
         2. Score_maker.py を起動し(起動には時間がかかります)， Open File ボタンから楽曲ファイルを選択します。
            既に譜面がある場合，上書きするか止めるか尋ねられます。
-        3. :arrow_forward: Play ボタンを押すと，1秒後に曲がスタートします。
+        3. ▶️ Play ボタンを押すと，1秒後に曲がスタートします。
         4. 実際に9つのパネルをクリックして譜面を作成します。
         5. 一時停止は STOP ボタンでできます。
-           :arrow_forward: Play ボタン で1秒後に再開します。
+           ▶️ Play ボタン で1秒後に再開します。
         6. 同じ楽曲で複数譜面を作成したい場合は，既にある楽曲名とは別の名前でmp3ファイルを用意し，選択してください。
         7. エラーにより，ファイルのコピーやデータベースへの登録が行われないことがあります。
            その場合は 手動での楽曲ファイルの追加 を参照してください。
