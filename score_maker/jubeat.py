@@ -30,6 +30,7 @@ class jubeat (ttk.Frame):
         self.music_score = []
         self.create_widgets()
         self.refresh_music_time()
+        self.showHELP()
     
     def refresh_music_time(self):
         if (self.music_status == 1 and pygame.mixer.music.get_busy() == 0):
@@ -150,7 +151,7 @@ class jubeat (ttk.Frame):
                 shutil.copyfile(self.Musicfilepath, "./assets/" + self.newMusicName + ".mp3")
             except:
                 tk.messagebox.showerror("楽曲ファイルコピー失敗", "楽曲ファイルをassetsフォルダに移動することに失敗しました。\n手動での移動をお願いします。")
-        if (self.overwrite):
+        if (self.overwrite==False):
             try:
                 data = None
                 with open("./music_names.txt", "r", encoding="utf-8") as f:

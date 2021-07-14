@@ -14,14 +14,14 @@ import Timer
 #セットした時間、音楽をsetting.txtから読み込み、リターンする
 #settingsリストは[アラームセット時刻の時, アラームセット時刻の分, アラーム音, After関数用のID ]
 def read_setting():
-    with open('./setting.txt', 'r')as f:
+    with open('./setting.txt', 'r', encoding='utf-8')as f:
         settings = f.read().split('\n')
         #print('settingファイル読み込み：'+str(settings))
     f.close()
     return settings
 #セットした時間、音楽をsetting.txtに書き込み
 def write_setting(settings):
-    with open('./setting.txt', 'wt') as f:
+    with open('./setting.txt', 'wt', encoding='utf-8') as f:
         for num in range(5):
             f.write(settings[num]+'\n')
         #print('ファイル書き込み：'+str(settings))
