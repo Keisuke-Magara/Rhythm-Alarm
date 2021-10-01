@@ -1,6 +1,7 @@
 # Rhythm Alarm!
 **コナミの大人気リズムゲーム "jubeat" のような，パネルクリック型のリズムゲームをクリアするまでミュージックが止まらないアラームです。**  
 exeファイルは [Release ページからダウンロード](https://github.com/Keisuke-Magara/The-Rhythm-Alarm/releases/tag/v1.0 "version1.0 download") できます。  
+ソフトの詳細な仕組みの説明については [こちら](https://github.com/Keisuke-Magara/The-Rhythm-Alarm/blob/main/Technical-document.md "テクニカルドキュメント") をご覧ください。  
 
 ## **製作者**
     東京都市大学 2021年度 SD-PBL(2) 第2期05班
