@@ -1,0 +1,5 @@
+# Please install these packages via pip before running the program.
+mutagen
+numpy
+pillow
+pygame
